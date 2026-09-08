@@ -1,0 +1,16 @@
+services:
+  cpp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        HOST_UID: ${USER_ID:-1000}
+        HOST_GID: ${GROUP_ID:-1000}
+
+    volumes:
+      - .:/app
+
+    working_dir: /app
+
+    tty: true
+    stdin_open: true

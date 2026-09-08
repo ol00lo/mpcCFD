@@ -1,0 +1,44 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/multithreading_tests",
+            "args": [
+                "${input:testTag}"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "CMake: Build Debug"
+        },
+        {
+            "name": "Release tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build-release/bin/multithreading_tests",
+            "args": [
+                "${input:testTag}"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "CMake: Build Release"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testTag",
+            "type": "promptString",
+            "description": "Введите тег теста"
+        }
+    ]
+}
