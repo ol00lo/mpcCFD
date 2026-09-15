@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(mpcCFD LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -26,7 +26,24 @@ target_link_libraries(multithreading_tests
 
 target_compile_options(multithreading_tests
     PRIVATE
-        -Wall
-        -Wextra
-        -Wpedantic
+    -Werror
+    -Wall
+    -Wextra
+    -Wpedantic
+    -Wconversion
+    -Wunused-const-variable
+    -Wduplicated-cond
+    -Wnon-virtual-dtor
+    -Woverloaded-virtual
+    -Wredundant-decls
+    -Wsign-promo
+    -Wzero-as-null-pointer-constant
+    -Wsuggest-override
+    -Wshadow
+    -Wfloat-equal
+    -Wcast-qual
+    -Wlogical-op
+    -Wcast-align
+    -Wold-style-cast
+    -Wmissing-field-initializers
 )
