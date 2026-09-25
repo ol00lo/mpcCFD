@@ -12,7 +12,7 @@ find_package(Catch2 3 REQUIRED)
 
 file(GLOB TASK_SOURCES
     CONFIGURE_DEPENDS
-    "src/*/*/*.cpp"
+    "src/tests/*/test.cpp"
 )
 
 add_executable(multithreading_tests
