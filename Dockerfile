@@ -13,6 +13,9 @@ RUN apt-get update && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100 && \
     rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install --break-system-packages --no-cache-dir numpy
+RUN pip3 install --break-system-packages --no-cache-dir matplotlib
+
 # ================ CREATE USER
 RUN usermod -l user ubuntu && \
     groupmod -n user ubuntu && \
