@@ -21,3 +21,4 @@
 0. [Simple example](src/tests/00_simple_test/README.md)
 1. [CSR](src/tests/01_csr_matrix/README.md)
 2. [TriDiagThomas](src/tests/02_tridiag_thomas/README.md)
+3. [SAT](src/tests/03_sat/README.md)
