@@ -43,7 +43,7 @@ std::vector<double> thomas(const TridiagMatrix& m, const std::vector<double>& d)
 }
 
 std::vector<double> thomas_range(int start, int end, const TridiagMatrix& m, const std::vector<double>& d,
-                                 double left_bc, double right_bc) {
+                                 [[maybe_unused]] double left_bc, [[maybe_unused]] double right_bc) {
     if (static_cast<int>(d.size()) != m.n)
         throw std::invalid_argument("d.size() != m.n");
     if (m.n == 0)
@@ -51,14 +51,15 @@ std::vector<double> thomas_range(int start, int end, const TridiagMatrix& m, con
     if (std::abs(m.b[start]) < 1e-16)
         throw std::runtime_error("zero b[0]: thomas method not applicable");
 
-    const int n = end - start;
+    [[maybe_unused]] const int n = end - start;
 
     // TODO
 
     return {};
 }
 
-std::vector<double> thomas_parallel(const TridiagMatrix& m, const std::vector<double>& d, int nthreads) {
+std::vector<double> thomas_parallel(const TridiagMatrix& m, [[maybe_unused]] const std::vector<double>& d,
+                                    [[maybe_unused]] int nthreads) {
     std::vector<double> x_old(m.n, 0.0);
     std::vector<double> x_new = x_old;
     std::vector<std::thread> threads;
