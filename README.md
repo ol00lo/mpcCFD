@@ -22,3 +22,4 @@
 1. [CSR](src/tests/01_csr_matrix/README.md)
 2. [TriDiagThomas](src/tests/02_tridiag_thomas/README.md)
 3. [SAT](src/tests/03_sat/README.md)
+4. [Parallel Iterative](src/tests/04_par_iter/README.md)
