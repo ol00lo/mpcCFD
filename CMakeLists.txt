@@ -39,6 +39,7 @@ target_compile_options(mpc_options
 find_package(Catch2 3 REQUIRED)
 
 add_subdirectory(src/common)
+add_subdirectory(src/tests/05_grav2)
 
 file(GLOB TASK_SOURCES
     CONFIGURE_DEPENDS
@@ -54,4 +55,5 @@ target_link_libraries(multithreading_tests
         Catch2::Catch2WithMain
         mpc_common
         mpc_options
+        grav2
 )
