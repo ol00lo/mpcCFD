@@ -8,7 +8,37 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+add_library(mpc_options INTERFACE)
+
+target_compile_options(mpc_options
+    INTERFACE
+        $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:GNU,Clang>>:
+            -Wall
+            -Wextra
+            -Wpedantic
+            -Wconversion
+            -Wunused-const-variable
+            -Wduplicated-cond
+            -Wnon-virtual-dtor
+            -Woverloaded-virtual
+            -Wredundant-decls
+            -Wsign-promo
+            -Wzero-as-null-pointer-constant
+            -Wsuggest-override
+            -Wshadow
+            -Wfloat-equal
+            -Wcast-qual
+            -Wlogical-op
+            -Wcast-align
+            -Wold-style-cast
+            -Wmissing-field-initializers
+            -Werror
+        >
+)
+
 find_package(Catch2 3 REQUIRED)
+
+add_subdirectory(src/common)
 
 file(GLOB TASK_SOURCES
     CONFIGURE_DEPENDS
@@ -22,28 +52,6 @@ add_executable(multithreading_tests
 target_link_libraries(multithreading_tests
     PRIVATE
         Catch2::Catch2WithMain
-)
-
-target_compile_options(multithreading_tests
-    PRIVATE
-    -Werror
-    -Wall
-    -Wextra
-    -Wpedantic
-    -Wconversion
-    -Wunused-const-variable
-    -Wduplicated-cond
-    -Wnon-virtual-dtor
-    -Woverloaded-virtual
-    -Wredundant-decls
-    -Wsign-promo
-    -Wzero-as-null-pointer-constant
-    -Wsuggest-override
-    -Wshadow
-    -Wfloat-equal
-    -Wcast-qual
-    -Wlogical-op
-    -Wcast-align
-    -Wold-style-cast
-    -Wmissing-field-initializers
+        mpc_common
+        mpc_options
 )

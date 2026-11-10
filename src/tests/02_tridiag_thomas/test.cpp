@@ -39,7 +39,7 @@ std::vector<double> thomas(const TridiagMatrix& m, const std::vector<double>& d)
 
     // TODO
 
-    return {};
+    return {0};
 }
 
 std::vector<double> thomas_range(int start, int end, const TridiagMatrix& m, const std::vector<double>& d,
@@ -55,7 +55,7 @@ std::vector<double> thomas_range(int start, int end, const TridiagMatrix& m, con
 
     // TODO
 
-    return {};
+    return {0};
 }
 
 std::vector<double> thomas_parallel(const TridiagMatrix& m, [[maybe_unused]] const std::vector<double>& d,
@@ -65,7 +65,7 @@ std::vector<double> thomas_parallel(const TridiagMatrix& m, [[maybe_unused]] con
     std::vector<std::thread> threads;
 
     // TODO
-    return {};
+    return {0};
 }
 
 double residual(const TridiagMatrix& m, const std::vector<double>& x, const std::vector<double>& f) {

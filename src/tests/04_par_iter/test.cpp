@@ -1,7 +1,7 @@
 #include <catch2/catch_all.hpp>
 
+#include "tictoc.hpp"
 #include <atomic>
-#include <chrono>
 #include <condition_variable>
 #include <iostream>
 #include <locale>
@@ -220,14 +220,14 @@ TEST_CASE("parallel iterative solvers ", "[par_iter]") {
     std::vector<double> f = build_rhs(N);
     std::vector<double> x(N, 0.0);
 
-    auto start = std::chrono::steady_clock::now();
+    dbg::SetTicTimeUnit<std::chrono::microseconds>();
 
-    solve_jacobi_serial(A, f, x);
+    {
+        dbg::ScopedTic tic("solve_jacobi_serial");
+        solve_jacobi_serial(A, f, x);
+    }
 
-    auto end = std::chrono::steady_clock::now();
-    auto us = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    dbg::FinReport();
 
-    std::cout << "Processed in " << us << " microseconds" << std::endl;
-
-    CHECK(compute_residual(A, f, x) == Catch::Approx(0)).epsilon(1e-9);
+    CHECK(compute_residual(A, f, x) == Catch::Approx(0.0).epsilon(1e-9));
 }
