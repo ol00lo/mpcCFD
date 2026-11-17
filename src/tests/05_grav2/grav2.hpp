@@ -3,6 +3,8 @@
 
 #include "grav2_common.hpp"
 
+#include <array>
+
 namespace grav2 {
 
 enum struct HaloAlgorithm {

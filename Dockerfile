@@ -2,7 +2,7 @@ FROM ubuntu:24.04
 
 # ================ INSTALL DEPS
 RUN apt-get update && \
-    apt-get install -y gcc-14 g++-14 cmake && \
+    apt-get install -y gcc-14 g++-14 cmake rsync && \
     apt-get install -y gdb valgrind clang-format cmake-format  && \
     apt-get install -y catch2 && \
     apt-get install -y openmpi-bin libopenmpi-dev && \
