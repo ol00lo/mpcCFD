@@ -57,23 +57,19 @@ void Report(std::string s = "");
  */
 void FinReport(std::string s = "");
 
-namespace detail{
+namespace detail {
 void set_time_unit_coef(size_t n_nanoseconds);
 }
 
 template<typename T>
-concept TicTimeUnitConcept =
-    std::same_as<T, std::chrono::nanoseconds>  ||
-    std::same_as<T, std::chrono::microseconds> ||
-    std::same_as<T, std::chrono::milliseconds> ||
-    std::same_as<T, std::chrono::seconds>;
+concept TicTimeUnitConcept = std::same_as<T, std::chrono::nanoseconds> || std::same_as<T, std::chrono::microseconds> ||
+                             std::same_as<T, std::chrono::milliseconds> || std::same_as<T, std::chrono::seconds>;
 
 template<TicTimeUnitConcept TimeUnit>
-void SetTicTimeUnit(){
+void SetTicTimeUnit() {
     detail::set_time_unit_coef(std::chrono::duration_cast<std::chrono::nanoseconds>(TimeUnit{1}).count());
 }
 
 } // namespace dbg
 
 #endif
-

@@ -61,6 +61,7 @@ public:
 
     static inline std::string units_str = "milli-seconds";
     static inline size_t units_mult = 1'000'000;
+
 private:
     using hr_clock_t = std::chrono::high_resolution_clock;
     using time_point_t = hr_clock_t::time_point;
@@ -76,7 +77,7 @@ private:
 class IndexedTicToc : public TicToc {
 public:
     /// create time with defined name.
-    IndexedTicToc(std::string name) : TicToc(name, false){};
+    IndexedTicToc(std::string name) : TicToc(name, false) {};
 
     void tic_indexed(size_t index) {
         tic();
@@ -191,14 +192,23 @@ Timers alltimers_;
 
 } // namespace
 
-void dbg::detail::set_time_unit_coef(size_t n_nanoseconds){
+void dbg::detail::set_time_unit_coef(size_t n_nanoseconds) {
     TicToc::units_mult = n_nanoseconds;
-    switch (n_nanoseconds){
-        case 1: TicToc::units_str = "nano-seconds"; break;
-        case 1'000: TicToc::units_str = "micro-seconds"; break;
-        case 1'000'000: TicToc::units_str = "milli-seconds"; break;
-        case 1'000'000'000: TicToc::units_str = "seconds"; break;
-        default: TicToc::units_str = std::format("{}*us", n_nanoseconds);
+    switch (n_nanoseconds) {
+    case 1:
+        TicToc::units_str = "nano-seconds";
+        break;
+    case 1'000:
+        TicToc::units_str = "micro-seconds";
+        break;
+    case 1'000'000:
+        TicToc::units_str = "milli-seconds";
+        break;
+    case 1'000'000'000:
+        TicToc::units_str = "seconds";
+        break;
+    default:
+        TicToc::units_str = std::format("{}*us", n_nanoseconds);
     }
 }
 
@@ -339,4 +349,3 @@ ScopedTic::~ScopedTic() {
         Toc(s_, index_);
     }
 }
-

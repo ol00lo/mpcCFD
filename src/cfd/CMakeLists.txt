@@ -1,0 +1,30 @@
+set(SRC
+    fvm_poisson_assembler.cpp
+    cfd_common.cpp
+    mat/csrmat.cpp
+    mat/lodmat.cpp
+    mat/densemat.cpp
+    mat/mat_solver.cpp
+    geom/simplex.cpp
+    grid/vtk.cpp
+    grid/i_grid.cpp
+    grid/grid1d.cpp
+    grid/regular_grid2d.cpp
+    grid/unstructured_grid2d.cpp
+    grid/cell_finder.cpp
+    grid/grid_partition.cpp
+    fvm/fvm_extended_collocations.cpp
+    fvm/fvm_gradient.cpp
+    fvm/fvm_dfdn.cpp
+)
+
+add_library(
+    cfd
+    STATIC
+    ${SRC}
+)
+
+target_include_directories(cfd
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/..
+)
