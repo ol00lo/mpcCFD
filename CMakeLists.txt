@@ -8,6 +8,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+option(WITH_MPI "Build MPI tests" OFF)
+
+if(WITH_MPI)
+    find_package(MPI REQUIRED COMPONENTS CXX)
+endif()
+
 add_library(mpc_options INTERFACE)
 
 target_compile_options(mpc_options
@@ -41,7 +47,9 @@ find_package(Catch2 3 REQUIRED)
 add_subdirectory(src/common)
 add_subdirectory(src/cfd)
 add_subdirectory(src/tests/05_grav2)
-add_subdirectory(src/tests/06_ddm)
+if(WITH_MPI)
+    add_subdirectory(src/tests/06_ddm/mpi_tests)
+endif()
 
 file(GLOB TASK_SOURCES
     CONFIGURE_DEPENDS

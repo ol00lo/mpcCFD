@@ -6,9 +6,12 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "-S", "${workspaceFolder}",
-                "-B", "${workspaceFolder}/build",
-                "-DCMAKE_BUILD_TYPE=Debug"
+                "-S",
+                "${workspaceFolder}",
+                "-B",
+                "${workspaceFolder}/build",
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DWITH_MPI=OFF"
             ],
             "problemMatcher": []
         },
@@ -17,7 +20,8 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", "${workspaceFolder}/build",
+                "--build",
+                "${workspaceFolder}/build",
                 "--parallel"
             ],
             "dependsOn": "CMake: Configure Debug",
@@ -30,13 +34,44 @@
             ]
         },
         {
+            "label": "CMake: Configure MPI Debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                "${workspaceFolder}",
+                "-B",
+                "${workspaceFolder}/build-mpi",
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DWITH_MPI=ON"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "CMake: Build MPI Debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build-mpi",
+                "--parallel"
+            ],
+            "dependsOn": "CMake: Configure MPI Debug",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
             "label": "CMake: Configure Release",
             "type": "shell",
             "command": "cmake",
             "args": [
-                "-S", "${workspaceFolder}",
-                "-B", "${workspaceFolder}/build-release",
-                "-DCMAKE_BUILD_TYPE=Release"
+                "-S",
+                "${workspaceFolder}",
+                "-B",
+                "${workspaceFolder}/build-release",
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DWITH_MPI=OFF"
             ],
             "problemMatcher": []
         },
@@ -45,7 +80,8 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", "${workspaceFolder}/build-release",
+                "--build",
+                "${workspaceFolder}/build-release",
                 "--parallel"
             ],
             "dependsOn": "CMake: Configure Release",
