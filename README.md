@@ -24,3 +24,4 @@
 3. [SAT](src/tests/03_sat/README.md)
 4. [Parallel Iterative](src/tests/04_par_iter/README.md)
 5. [Grav2](src/tests/05_grav2/README.md)
+6. [DDM](src/tests/06_ddm/README.md)
