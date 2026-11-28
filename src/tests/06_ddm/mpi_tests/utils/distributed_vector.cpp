@@ -48,7 +48,8 @@ size_t Exchanger::size() const {
 
 MPI_Request Exchanger::post_recv(int tag, ExchangeBuffer& buf) const {
     MPI_Request req;
-    MPI_Irecv(buf.recv_buffer.data(), buf.recv_buffer.size(), MPI_DOUBLE, other_rank_, tag, MPI_COMM_WORLD, &req);
+    MPI_Irecv(buf.recv_buffer.data(), static_cast<int>(buf.recv_buffer.size()), MPI_DOUBLE, other_rank_, tag,
+              MPI_COMM_WORLD, &req);
     return req;
 }
 
@@ -57,7 +58,8 @@ MPI_Request Exchanger::post_send(int tag, ExchangeBuffer& buf, const std::vector
         buf.send_buffer[i] = value[indexes_[i]];
     }
     MPI_Request req;
-    MPI_Isend(buf.send_buffer.data(), buf.send_buffer.size(), MPI_DOUBLE, other_rank_, tag, MPI_COMM_WORLD, &req);
+    MPI_Isend(buf.send_buffer.data(), static_cast<int>(buf.recv_buffer.size()), MPI_DOUBLE, other_rank_, tag,
+              MPI_COMM_WORLD, &req);
     return req;
 }
 
@@ -110,7 +112,7 @@ void RankContext::setup_exchangers() {
 
     // gather sizes from all ranks
     std::vector<int> sizes(mpi_size);
-    int my_size = global_indexes.size();
+    int my_size = static_cast<int>(global_indexes.size());
     MPI_Allgather(&my_size, 1, MPI_INT, sizes.data(), 1, MPI_INT, MPI_COMM_WORLD);
 
     // offsets
@@ -185,7 +187,7 @@ void DistributedVector::exchange_bc() {
     }
 
     // 4. wait for all exhanges
-    MPI_Waitall(reqs.size(), reqs.data(), MPI_STATUSES_IGNORE);
+    MPI_Waitall(static_cast<int>(reqs.size()), reqs.data(), MPI_STATUSES_IGNORE);
 
     // 5. use input buffers
     for (size_t i = 0; i < rank_context_->exchangers.size(); ++i) {
@@ -202,7 +204,7 @@ std::vector<double> DistributedVector::get_full_vector() const {
         buf[rank_context_->global_indexes[i]] = rank_context_->blending_weights[i] * value[i];
     }
     void* from = (mpi_rank == 0) ? MPI_IN_PLACE : buf.data();
-    MPI_Reduce(from, buf.data(), buf.size(), MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(from, buf.data(), static_cast<int>(buf.size()), MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
     return (mpi_rank == 0) ? buf : std::vector<double>{};
 }

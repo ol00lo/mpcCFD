@@ -3,6 +3,10 @@ add_executable(mpi_test
     mpi_reduce_test.cpp
     mpi_schwarz_test.cpp
 	mpi_test_common.hpp
+    mpi_distributed_test.cpp
+    mpi_algebraic_schwarz_test.cpp
+    utils/distributed_vector.cpp
+    utils/distributed_mat_solver.cpp
 )
 
 target_link_libraries(mpi_test

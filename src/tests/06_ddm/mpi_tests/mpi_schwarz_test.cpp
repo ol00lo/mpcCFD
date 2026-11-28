@@ -65,7 +65,7 @@ TEST_CASE("Schwarz", "[schwarz]") {
 
     auto test_data = std::make_shared<TestData2D>();
     // read grid
-    std::string grid_fn = "/app/test_data/trigrid_500.vtk";
+    std::string grid_fn = "/app/src/tests/06_ddm/test_data/trigrid_500.vtk";
     auto grid = UnstructuredGrid2D::vtk_read_p(grid_fn);
     size_t n_colloc = grid->n_cells() + grid->n_boundary_faces();
 

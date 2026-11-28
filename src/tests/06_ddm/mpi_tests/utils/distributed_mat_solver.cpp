@@ -21,12 +21,14 @@ DistributedSeidelMatrixSolver::DistributedSeidelMatrixSolver(CsrMatrix mat, int 
       mat_(std::move(mat)),
       diag_(diag_without_zero_division(mat_)) {}
 
-int DistributedSeidelMatrixSolver::solve(const DistributedVector& rhs, DistributedVector& ret) const {
+int DistributedSeidelMatrixSolver::solve([[maybe_unused]] const DistributedVector& rhs,
+                                         [[maybe_unused]] DistributedVector& ret) const {
     if (mat_.n_rows() == 0) {
         throw std::runtime_error("Invalid matrix in SeidelMatrixSolver");
     }
 
     // ALGEBRAIC_SCHWARZ.2
+    double global_residual;
 
     std::cout << std::format("WARNING: Seidel solver failed to converge in {} iterations. Final residual {}", maxit_,
                              global_residual)
